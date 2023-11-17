@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  # portainer
+  portainer:
+    image: 'linuxserver/portainer'

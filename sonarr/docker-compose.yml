@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  # sonarr
+  sonarr-server:
+    image: 'linuxserver/sonarr'

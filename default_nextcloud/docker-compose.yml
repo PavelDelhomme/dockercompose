@@ -1,0 +1,100 @@
+version: '3'
+
+services:
+  nextcloud:
+    image: nextcloud:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - nextcloud_data:/var/www/html
+
+  db_nextcloud:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: PavelAdmin
+      MYSQL_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+    volumes:
+      - db_nextcloud:/var/lib/mysql
+
+  onlyoffice:
+    image: onlyoffice/documentserver
+    expose:
+      - '80'
+
+  nginx-proxy:
+    image: jc21/nginx-proxy-manager
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+
+  db_nginx_proxy:
+    image: jc21/mariadb-aria
+    environment:
+      MYSQL_ROOT_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+      MYSQL_DATABASE: nginx_proxy_manager
+      MYSQL_USER: PavelAdmin
+      MYSQL_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+    volumes:
+      - db_nginx_proxy:/var/lib/mysql
+
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - '9000:9000'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+  emby:
+    image: emby/embyserver:latest
+    ports:
+      - "8096:8096"
+    volumes:
+      - emby_config:/config
+      - /home/pavel/Video:/media
+
+  jackett:
+    image: linuxserver/jackett
+    ports:
+      - "9117:9117"
+    volumes:
+      - jackett_config:/config
+      - /home/pavel/Musiques:/downloads
+
+  radarr:
+    image: linuxserver/radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - radarr_config:/config
+      - /home/pavel/Films:/downloads
+      - /home/pavel/Downloads:/films/downloads
+
+  sonarr:
+    image: linuxserver/sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - sonarr_config:/config
+      - /tv:/tv
+      - /home/pavel/Downloads:/downloads
+
+volumes:
+  nextcloud_data:
+  db_nextcloud:
+  npm_data:
+  npm_letsencrypt:
+  db_nginx_proxy:
+  portainer_data:
+  emby_config:
+  jackett_config:
+  radarr_config:
+  sonarr_config:
