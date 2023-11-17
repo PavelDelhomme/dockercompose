@@ -8,7 +8,7 @@ services:
       - "81:81"
       - "443:443"
     volumes:
-      - npm_data:/data
+      - data_nginx_proxy
       - npm_letsencrypt:/etc/letsencrypt
 
   db_nginx_proxy:
@@ -22,6 +22,6 @@ services:
       - db_nginx_proxy:/var/lib/mysql
 
 volumes:
-  npm_data:
+  data_nginx_proxy:
   db_nginx_proxy:
-  npm_letsencrypt:
+  letsencrypt_nginx_proxy:
