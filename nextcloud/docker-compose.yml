@@ -41,13 +41,3 @@ services:
     networks:
       - backend
 
-  onlyoffice:
-    image: onlyoffice/documentserver
-    expose:
-      - '80'
-    volumes:
-      - document_data:/var/www/html/onlyoffice/Data
-      - document_log:/var/log/onlyoffice
-      - document_lib:/var/lib/onlyoffice
-    networks:
-      - backend

@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  emby:
+    image: emby/embyserver:latest
+    ports:
+      - "8096:8096"
+    volumes:
+      - emby_config:/config
+      - /home/pavel/Video:/media
+
+  jackett:
+    image: linuxserver/jackett
+    ports:
+      - "9117:9117"
+    volumes:
+      - jackett_config:/config
+      - /home/pavel/Musiques:/downloads
+
+  radarr:
+    image: linuxserver/radarr
+    ports:
+      - "7878:7878"
+    volumes:
+      - radarr_config:/config
+      - /home/pavel/Films:/downloads
+      - /home/pavel/Downloads:/films/downloads
+
+  sonarr:
+    image: linuxserver/sonarr
+    ports:
+      - "8989:8989"
+    volumes:
+      - sonarr_config:/config
+      - /tv:/tv
+      - /home/pavel/Downloads:/downloads
+
+volumes:
+  emby_config:
+  jackett_config:
+  radarr_config:
+  sonarr_config:

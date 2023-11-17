@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nginx-proxy:
+    image: jc21/nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+
+  db_nginx_proxy:
+    image: jc21/mariadb-aria
+    environment:
+      MYSQL_ROOT_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+      MYSQL_DATABASE: nginx_proxy_manager
+      MYSQL_USER: PavelAdmin
+      MYSQL_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+    volumes:
+      - db_nginx_proxy:/var/lib/mysql
+
+volumes:
+  npm_data:
+  db_nginx_proxy:
+  npm_letsencrypt:
