@@ -1,6 +1,0 @@
-version: '3'
-
-services:
-  # MariaDB
-  mariadb-server:
-    image: 'linuxserver/mariadb'
