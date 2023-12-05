@@ -13,12 +13,12 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: Pavel180400&SrvPortair@QEIHUSR6U9IP
+      MYSQL_ROOT_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
       MYSQL_DATABASE: nextcloud
       MYSQL_USER: PavelAdmin
-      MYSQL_PASSWORD: Pavel180400&SrvPortair@QEIHUSR6U9IP
+      MYSQL_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
     volumes:
-      - db_nextcloud:/var/lib/mysql
+      db_nextcloud:/var/lib/mysql
 
   onlyoffice:
     image: onlyoffice/documentserver

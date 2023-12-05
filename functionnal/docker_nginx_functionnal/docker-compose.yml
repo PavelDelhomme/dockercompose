@@ -6,8 +6,21 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "81:81"
+      - '443:443'
     volumes:
-      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+
+  db_nginx_proxy:
+    image: jc21/mariadb-aria
+    environment:
+      MYSQL_ROOT_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+      MYSQL_DATABASE: nginx_proxy_manager
+      MYSQL_USER: PavelAdmin
+      MYSQL_PASSWORD: Pavel180400&Nextcloud@QEIHUSR6U9IP
+    volumes:
+      - npm_db:/var/lib/mysql
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -17,10 +30,13 @@ services:
       - VIRTUAL_HOST=portainer.delhomme.ovh
       - VIRTUAL_PORT=9000
     ports:
-      - "8000:8000"
+      - "9000:9000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - portainer_data:/data
 
 volumes:
   portainer_data:
+  npm_data:
+  npm_db:
+  npm_letsencrypt:

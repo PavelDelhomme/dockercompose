@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  apache-test:
+    image: httpd:latest
+    container_name: apache-test
+    networks:
+      - shared_network_2
+    ports:
+      - "8081:80"
+
+networks:
+  shared_network_2:
+    external: true

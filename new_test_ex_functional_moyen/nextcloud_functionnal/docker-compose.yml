@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nextcloud-aio:
+    image: nextcloud/aio-onlyoffice
+    container_name: nextcloud-aio
+    restart: unless-stopped
+    environment:
+      - APACHE_PORT=8080
+      - APACHE_SERVER_NAME=nextcloud.delhomme.ovh
+    volumes:
+      - nextcloud_data:/var/www/html
+      - nextcloud_apps:/var/www/html/custom_apps
+      - nextcloud_config:/var/www/html/config
+      - nextcloud_themes:/var/www/html/themes
+    networks:
+      - aio_network
+      - portainer_default
+
+networks:
+  aio_network:
+    driver: bridge
+  portainer_default:
+    external: true
+
+volumes:
+  nextcloud_data:
+  nextcloud_apps:
+  nextcloud_config:
+  nextcloud_themes:
+
+
